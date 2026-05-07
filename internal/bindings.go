@@ -26,6 +26,11 @@ type Functions struct {
 	CommitFilter   func(filter uintptr)
 	ExecuteFilter  func(filter uintptr)
 	ReleaseFilter  func(filter uintptr)
+	// Device
+	GetNumPhysicalDevices   func() int32
+	GetPhysicalDeviceInt    func(physicalDeviceID int32, name *byte) int32
+	GetPhysicalDeviceString func(physicalDeviceID int32, name *byte) *byte
+	GetPhysicalDeviceBool   func(physicalDeviceID int32, name *byte) bool
 }
 
 // F is the global instance holding all registered functions.
@@ -50,6 +55,10 @@ func Init(lib uintptr) error {
 	purego.RegisterLibFunc(&f.CommitFilter, lib, "oidnCommitFilter")
 	purego.RegisterLibFunc(&f.ExecuteFilter, lib, "oidnExecuteFilter")
 	purego.RegisterLibFunc(&f.ReleaseFilter, lib, "oidnReleaseFilter")
+	purego.RegisterLibFunc(&f.GetNumPhysicalDevices, lib, "oidnGetNumPhysicalDevices")
+	purego.RegisterLibFunc(&f.GetPhysicalDeviceInt, lib, "oidnGetPhysicalDeviceInt")
+	purego.RegisterLibFunc(&f.GetPhysicalDeviceString, lib, "oidnGetPhysicalDeviceString")
+	purego.RegisterLibFunc(&f.GetPhysicalDeviceBool, lib, "oidnGetPhysicalDeviceBool")
 	F = f
 	return nil
 }

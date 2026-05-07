@@ -11,7 +11,11 @@ func main() {
 	if err := oidn.Init(); err != nil {
 		panic(err)
 	}
-
+	for i := 0; i < oidn.GetNumPhysicalDevices(); i++ {
+		typ := oidn.GetPhysicalDeviceInt(i, "type")
+		name := oidn.GetPhysicalDeviceString(i, "name")
+		fmt.Printf("Device %d: type=%d, name=%s\n", i, typ, name)
+	}
 	// 创建设备
 	device, err := oidn.NewDevice(oidn.DeviceTypeCPU)
 	if err != nil {

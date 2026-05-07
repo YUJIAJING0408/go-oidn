@@ -73,3 +73,36 @@ func (d *Device) GetError() error {
 func (d *Device) Handle() uintptr {
 	return d.h
 }
+
+// GetNumPhysicalDevices returns the number of supported physical devices.
+func GetNumPhysicalDevices() int {
+	if internal.F == nil {
+		return 0
+	}
+	return int(internal.F.GetNumPhysicalDevices())
+}
+
+// GetPhysicalDeviceInt gets an integer parameter of a physical device (e.g. "type").
+func GetPhysicalDeviceInt(physicalDeviceID int, name string) int {
+	if internal.F == nil {
+		return 0
+	}
+	return int(internal.F.GetPhysicalDeviceInt(int32(physicalDeviceID), cString(name)))
+}
+
+// GetPhysicalDeviceString gets a string parameter of a physical device (e.g. "name").
+func GetPhysicalDeviceString(physicalDeviceID int, name string) string {
+	if internal.F == nil {
+		return ""
+	}
+	ptr := internal.F.GetPhysicalDeviceString(int32(physicalDeviceID), cString(name))
+	return goString(ptr)
+}
+
+// GetPhysicalDeviceBool gets a boolean parameter of a physical device.
+func GetPhysicalDeviceBool(physicalDeviceID int, name string) bool {
+	if internal.F == nil {
+		return false
+	}
+	return internal.F.GetPhysicalDeviceBool(int32(physicalDeviceID), cString(name))
+}
