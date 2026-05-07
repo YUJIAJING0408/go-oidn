@@ -43,6 +43,11 @@ func (f *Filter) SetBool(name string, value bool) {
 	internal.F.SetFilterBool(f.h, cString(name), value)
 }
 
+// SetInt sets an integer parameter of the filter.
+func (f *Filter) SetInt(name string, value int) {
+	internal.F.SetFilterInt(f.h, cString(name), int32(value))
+}
+
 // SetFloat sets a float parameter of the filter.
 func (f *Filter) SetFloat(name string, value float32) {
 	internal.F.SetFilterFloat(f.h, cString(name), value)

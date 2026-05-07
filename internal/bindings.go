@@ -22,6 +22,7 @@ type Functions struct {
 	SetFilterImage func(filter uintptr, name *byte, buffer uintptr, format int32,
 		width, height, byteOffset, pixelByteStride, rowByteStride uintptr)
 	SetFilterBool  func(filter uintptr, name *byte, value bool)
+	SetFilterInt   func(filter uintptr, name *byte, value int32)
 	SetFilterFloat func(filter uintptr, name *byte, value float32)
 	CommitFilter   func(filter uintptr)
 	ExecuteFilter  func(filter uintptr)
@@ -51,6 +52,7 @@ func Init(lib uintptr) error {
 	purego.RegisterLibFunc(&f.NewFilter, lib, "oidnNewFilter")
 	purego.RegisterLibFunc(&f.SetFilterImage, lib, "oidnSetFilterImage")
 	purego.RegisterLibFunc(&f.SetFilterBool, lib, "oidnSetFilterBool")
+	purego.RegisterLibFunc(&f.SetFilterInt, lib, "oidnSetFilterInt")
 	purego.RegisterLibFunc(&f.SetFilterFloat, lib, "oidnSetFilterFloat")
 	purego.RegisterLibFunc(&f.CommitFilter, lib, "oidnCommitFilter")
 	purego.RegisterLibFunc(&f.ExecuteFilter, lib, "oidnExecuteFilter")
