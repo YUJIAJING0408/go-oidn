@@ -32,4 +32,4 @@ go.work.sum
 # .idea/
 # .vscode/
 
-lib/linux
+lib/linux/*
