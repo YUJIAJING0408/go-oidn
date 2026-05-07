@@ -1,13 +1,16 @@
-package simple_denoise
+package simple_denoising
 
 import (
 	"fmt"
+	"testing"
 
 	"github.com/YUJIAJING0408/go-oidn/oidn"
 )
 
-func main() {
+func Test(t *testing.T) {
 	// 初始化库
+	oidn.SetLibraryPath("I:\\Codes\\Go\\go-oidn\\lib\\windows")
+	oidn.SetVersion("v2.4.1")
 	if err := oidn.Init(); err != nil {
 		panic(err)
 	}
@@ -28,15 +31,15 @@ func main() {
 	}
 
 	// 加载图片
-	colorData, width, height, err := oidn.LoadPNG("noisy.png")
+	colorData, width, height, err := oidn.LoadPNG("I:\\Codes\\Go\\go-oidn\\noisy.png")
 	if err != nil {
 		panic(err)
 	}
-	albedoData, width, height, err := oidn.LoadPNG("albedo.png")
+	albedoData, width, height, err := oidn.LoadPNG("I:\\Codes\\Go\\go-oidn\\albedo.png")
 	if err != nil {
 		panic(err)
 	}
-	normalData, width, height, err := oidn.LoadPNG("normal.png")
+	normalData, width, height, err := oidn.LoadPNG("I:\\Codes\\Go\\go-oidn\\normal.png")
 	if err != nil {
 		panic(err)
 	}
@@ -81,6 +84,6 @@ func main() {
 
 	// 保存结果
 	result := outputBuf.Read(width * height * 3)
-	oidn.SavePNG(result, width, height, "denoised.png")
+	oidn.SavePNG(result, width, height, "I:\\Codes\\Go\\go-oidn\\denoised.png")
 	fmt.Println("Done.")
 }
